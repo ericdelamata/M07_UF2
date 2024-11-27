@@ -11,7 +11,7 @@ d = readCSVasDicitionary()
 create_table(conn)
 
 for i in range(len(d.get("WORD"))):
-    create(conn, d.get("WORD")[i], d.get("THEME")[i])
+    create(conn, i, d.get("WORD")[i], d.get("THEME")[i])
     
 try:
     cursor = conn.cursor()
