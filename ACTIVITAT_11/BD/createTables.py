@@ -33,8 +33,8 @@ def CreateGame(conn):
 def CreateWords(conn):
     cursor = conn.cursor()
     cursor.execute('''
-        DROP TABLE IF EXISTS Word;
-        CREATE TABLE IF NOT EXISTS Word (
+        DROP TABLE IF EXISTS Words;
+        CREATE TABLE IF NOT EXISTS Words (
             id SERIAL PRIMARY KEY NOT NULL UNIQUE,
             word VARCHAR(50) NOT NULL,
             theme VARCHAR(50) NOT NULL,
@@ -50,7 +50,8 @@ def CreateLanguage(conn):
         CREATE TABLE IF NOT EXISTS Language (
             id SERIAL PRIMARY KEY NOT NULL UNIQUE,
             name VARCHAR(50) NOT NULL,
-            alphabet VARCHAR(50) NOT NULL
+            alphabet VARCHAR(50) NOT NULL,
+            startGame VARCHAR(50) NOT NULL
         );
     ''')
     print("Table Language created succesfully!")

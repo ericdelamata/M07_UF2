@@ -12,19 +12,38 @@ conn = psycopg2.connect(
         port="5432"
         )
 
-def options():
-    query = "SELECT theme FROM Word GROUP BY theme"
+def options_theme():
+    query = "SELECT theme FROM Words GROUP BY theme"
 
     df = pd.read_sql_query(query, conn)
 
     return df['theme']
 
+def get_trys(id):
+    
+    cursor = conn.cursor();
+    
+    query = "SELECT trys FROM Game WHERE id = %s"
+    cursor.execute(query,id)
+    
+    trys = cursor.fetchone()
+    
+    return trys[0]
+    
+    
+
+def options_language():
+    query = "SELECT name FROM Language GROUP BY theme"
+
+    df = pd.read_sql_query(query, conn)
+
+    return df['name']
 
 def read_word_db(option):
 
    cursor = conn.cursor()
 
-   sql = "SELECT word FROM paraules WHERE theme = %s;"
+   sql = "SELECT word FROM Words WHERE theme = %s;"
    values = (option,)
    cursor.execute(sql, values)
 
