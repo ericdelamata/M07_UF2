@@ -39,7 +39,19 @@ async def get_image_number(game_id: int):
    return image_number
 
 #poso tot el text a renderitzar en aquest endpoint sense el de començar partida
-@app.get("/penjat/game/info/{language}", response_model = List[dict])
-async def get_texts():
-   
-   return schemas.options_schema(actions.options())
+@app.get("/penjat/game/info/{user_id}", response_model = List[dict])
+async def get_texts(user_id: int):
+   texts = actions.get_text(user_id)
+   user_info = actions.get_user_info(user_id)
+   current_score = actions.get_current_score(user_id)
+   best_game_date = actions.get_best_game_date(user_id)
+   best_game_score = actions.get_best_game_score(user_id)
+   return schemas.text_render(user_info[0],texts[0],current_score,texts[1],user_info[1],texts[2],user_info[2],texts[3],best_game_date,best_game_score)
+
+@app.get("/penjat/game/language/{language}", response_model = List[dict])
+async def get_alphabet(language: str):
+   return actions.get_alphabet(language)
+
+@app.get("/penjat/game/language/start_game/{language}", response_model = List[dict])
+async def get_start_game(language: str):
+   return actions.get_start_game(language)

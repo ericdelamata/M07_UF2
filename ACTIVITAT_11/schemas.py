@@ -14,6 +14,12 @@ def image_number(trys) -> dict:
         "image number":trys
     }
     
-def text_render() -> dict:
-    "user"
+def text_render(user_name,score_current_text,current_score,total_games_text,total_games,won_games_text,won_games,best_game_text,best_game_date,best_game_score) -> dict:
+    return{
+        "user":user_name,
+        score_current_text:current_score,
+        total_games_text:total_games,
+        won_games_text:won_games,
+        best_game_text:best_game_date+" - "+best_game_score
+    }
     
